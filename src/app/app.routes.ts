@@ -7,11 +7,14 @@ import { ExploreMovies } from './features/movies/pages/explore-movies/explore-mo
 import { FavoriteMovies } from './features/favorites/pages/favorite-movies/favorite-movies';
 import { MovieDetails } from './features/movies/pages/movie-details/movie-details';
 import { CreateMovie } from './features/movies/pages/create-movie/create-movie';
+import { authGuard } from './core/guards/auth-guard';
+import { guestGuard } from './core/guards/guest-guard';
 
 export const routes: Routes = [
   {
     path: 'auth',
     component: AuthenticationScreen,
+    canActivate: [guestGuard],
     children: [
       { path: '', redirectTo: 'login', pathMatch: 'full' },
       { path: 'login', component: LoginForm },
@@ -21,6 +24,7 @@ export const routes: Routes = [
   {
     path: '',
     component: MainLayout,
+    canActivate: [authGuard],
     children: [
       { path: '', redirectTo: 'explore', pathMatch: 'full' },
       { path: 'explore', component: ExploreMovies },
@@ -31,5 +35,10 @@ export const routes: Routes = [
       { path: 'details/:id', component: MovieDetails },
       { path: 'create', component: CreateMovie },
     ],
+  },
+  {
+    path: '**',
+    redirectTo: 'auth/login',
+    pathMatch: 'full',
   },
 ];
