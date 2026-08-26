@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MoviesList } from '../../../../shared/components/movies-list/movies-list';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-explore-movies',
@@ -10,5 +11,9 @@ import { MoviesList } from '../../../../shared/components/movies-list/movies-lis
 export class ExploreMovies {
   movies = signal([{}]);
 
-  adicionarFilme() {}
+  private readonly _router = inject(Router);
+
+  adicionarFilme() {
+    this._router.navigate(['create']);
+  }
 }
