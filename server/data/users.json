@@ -58,5 +58,23 @@
     "name": "Felipe",
     "email": "fe@teee.com",
     "password": "felipe098"
+  },
+  {
+    "id": 1788109707103,
+    "name": "Juscier",
+    "email": "juscier@gmail.com",
+    "password": "12345678"
+  },
+  {
+    "id": 1788109944618,
+    "name": "Afonso",
+    "email": "afonso@gmail.com",
+    "password": "123456789"
+  },
+  {
+    "id": 1788110025492,
+    "name": "Porronto",
+    "email": "porronto@gmail.com",
+    "password": "123456789"
   }
 ]

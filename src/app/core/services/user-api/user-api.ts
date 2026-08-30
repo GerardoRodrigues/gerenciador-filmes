@@ -4,6 +4,7 @@ import { IUserTokenSuccessAuthResponse } from '../../../shared/models/user-token
 import { UserTokenStore } from '../user-token-store/user-token-store';
 import { tap } from 'rxjs';
 import { IUserLoginSuccessResponse } from '../../../shared/models/user-login-success-response';
+import { IUserRegisterSuccessResponse } from '../../../shared/models/user-register-success-response';
 
 @Injectable({
   providedIn: 'root',
@@ -27,5 +28,11 @@ export class UserApi {
       .pipe(tap((response) => this._userTokenStore.saveToken(response.token)));
   }
 
-  register() {}
+  register(name: string, email: string, password: string) {
+    return this._httpClient.post<IUserRegisterSuccessResponse>(`${this.URL}/users`, {
+      name,
+      email,
+      password,
+    });
+  }
 }

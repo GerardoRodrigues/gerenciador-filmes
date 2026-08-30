@@ -21,16 +21,16 @@
       <!-- Botões de Login e Cadastro -->
       <div class="flex bg-[#202024] p-1 rounded-lg">
         <button
-          [routerLink]="'login'"
-          [routerLinkActive]="'bg-[#2c2c30] text-purple-800 shadow font-medium'"
-          class="flex-1 py-2 text-sm text-gray-400 hover:text-white transition cursor-pointer rounded"
+          routerLink="login"
+          routerLinkActive="bg-[#2c2c30] rounded text-purple-800 shadow font-medium"
+          class="flex-1 py-2 text-sm text-gray-400 hover:text-white transition cursor-pointer"
         >
           Login
         </button>
         <button
-          [routerLink]="'register'"
-          [routerLinkActive]="'bg-[#2c2c30] text-purple-800 shadow font-medium'"
-          class="flex-1 py-2 text-sm text-gray-400 hover:text-white transition cursor-pointer rounded"
+          routerLink="register"
+          routerLinkActive="bg-[#2c2c30] rounded text-purple-800 shadow font-medium"
+          class="flex-1 py-2 text-sm text-gray-400 hover:text-white transition cursor-pointer"
         >
           Cadastro
         </button>

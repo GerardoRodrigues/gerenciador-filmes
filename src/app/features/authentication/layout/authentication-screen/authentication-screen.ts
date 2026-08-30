@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
-import { RouterOutlet, RouterLinkWithHref, RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterOutlet,  } from '@angular/router';
 
 @Component({
   selector: 'app-authentication-screen',
-  imports: [RouterOutlet, RouterLinkWithHref, RouterLinkActive],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive],
   templateUrl: './authentication-screen.html',
   styleUrl: './authentication-screen.css',
 })
