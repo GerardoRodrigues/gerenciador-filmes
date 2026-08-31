@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from "@angular/router";
+import { Component, inject, linkedSignal } from '@angular/core';
+import { NavigationEnd, Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { UserTokenStore } from '../../services/user-token-store/user-token-store';
+import { UserInfosStore } from '../../services/user-infos-store/user-infos-store';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -8,13 +12,27 @@ import { RouterLink, RouterLinkActive } from "@angular/router";
   styleUrl: './header.css',
 })
 export class Header {
-  isMenuOpen = false;
+  private readonly _userTokenStore = inject(UserTokenStore);
+  private readonly _router = inject(Router);
+  readonly _userInfosStore = inject(UserInfosStore);
+
+  navigateEnd = toSignal(
+    this._router.events.pipe(filter((event) => event instanceof NavigationEnd)),
+  );
+
+  isMenuOpen = linkedSignal({
+    source: this.navigateEnd,
+    computation: () => false,
+  });
 
   toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
+    this.isMenuOpen.update((isOpen) => !isOpen);
   }
 
   logout() {
-    console.log('Saindo do sistema...');
+    this._userTokenStore.removeToken();
+    this._userInfosStore.removeUserName();
+
+    this._router.navigate(['/auth/login']);
   }
 }
