@@ -6,8 +6,8 @@
     "genero": "Sci-Fi",
     "anoLancamento": 2021,
     "caminhoImagem": "/uploads/image-1765666339432-345152340.jpg",
-    "qtdVotos": 105,
-    "mediaVotos": 3.3457
+    "qtdVotos": 108,
+    "mediaVotos": 3.3916
   },
   {
     "id": 1765666870211,
@@ -16,7 +16,7 @@
     "genero": "Sci-Fi",
     "anoLancamento": 2014,
     "caminhoImagem": "/uploads/image-1765666870177-14156342.jpg",
-    "qtdVotos": 188,
-    "mediaVotos": 4.8421
+    "qtdVotos": 228,
+    "mediaVotos": 4.7338
   }
 ]
