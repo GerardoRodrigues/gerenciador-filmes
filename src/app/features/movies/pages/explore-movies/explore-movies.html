@@ -33,7 +33,7 @@
       <app-movies-filter [(title)]="movieTitleSearch" [(category)]="movieCategorySearch" />
     </div>
 
-    @if (moviesList().length === 0) {
+    @if (moviesList().length === 0 && !moviesResource.isLoading()) {
       <div class="flex-1 flex flex-col items-center justify-center text-center p-8">
         <img
           src="images/my-movies.svg"
@@ -67,6 +67,8 @@
           <span class="text-sm font-medium">Limpar filtro</span>
         </button>
       </div>
+    } @else if (moviesResource.isLoading()) {
+      <app-spinner />
     } @else {
       <app-movies-list [movies]="moviesList()" />
     }
