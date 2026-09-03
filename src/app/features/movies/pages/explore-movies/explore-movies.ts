@@ -1,6 +1,6 @@
 import { Component, inject, linkedSignal, signal } from '@angular/core';
 import { MoviesList } from '../../../../shared/components/movies-list/movies-list';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MoviesFilter } from '../../components/movies-filter/movies-filter';
 import { MoviesApi } from '../../services/movies-api/movies-api';
 import { rxResource } from '@angular/core/rxjs-interop';
@@ -8,7 +8,7 @@ import { Spinner } from '../../../../shared/components/spinner/spinner';
 
 @Component({
   selector: 'app-explore-movies',
-  imports: [MoviesList, MoviesFilter, Spinner],
+  imports: [MoviesList, MoviesFilter, Spinner, RouterLink],
   templateUrl: './explore-movies.html',
   styleUrl: './explore-movies.css',
 })
@@ -43,7 +43,7 @@ export class ExploreMovies {
   });
 
   adicionarFilme() {
-    this._router.navigate(['create']);
+    
   }
 
   limparFiltro() {

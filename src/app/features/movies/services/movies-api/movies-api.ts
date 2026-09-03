@@ -23,4 +23,8 @@ export class MoviesApi {
       rating,
     });
   }
+
+  createMovie(movieData: FormData) {
+    return this._httpClient.post<IMovieSuccessResponse>(`${this.URL}/movies`, movieData);
+  }
 }

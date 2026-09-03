@@ -18,5 +18,45 @@
     "caminhoImagem": "/uploads/image-1765666870177-14156342.jpg",
     "qtdVotos": 228,
     "mediaVotos": 4.7338
+  },
+  {
+    "id": 1788445986799,
+    "titulo": "Super Mario",
+    "descricao": "Desenho super mario",
+    "genero": "Desenho",
+    "anoLancamento": 2000,
+    "caminhoImagem": "/uploads/image-1788445986795-717673774.png",
+    "qtdVotos": 5,
+    "mediaVotos": 5
+  },
+  {
+    "id": 1788446251797,
+    "titulo": "Cat Movie",
+    "descricao": "Filme do gato",
+    "genero": "Ação",
+    "anoLancamento": 1988,
+    "caminhoImagem": "/uploads/image-1788446251795-847290803.jpg",
+    "qtdVotos": 0,
+    "mediaVotos": 0
+  },
+  {
+    "id": 1788446325144,
+    "titulo": "Gato de botas",
+    "descricao": "Filme do gato de botas",
+    "genero": "Comédia",
+    "anoLancamento": 2001,
+    "caminhoImagem": "/uploads/image-1788446325138-630482531.png",
+    "qtdVotos": 0,
+    "mediaVotos": 0
+  },
+  {
+    "id": 1788447103680,
+    "titulo": "Aurora",
+    "descricao": "Aurora boreal roxa",
+    "genero": "Espacial",
+    "anoLancamento": 2016,
+    "caminhoImagem": "/uploads/image-1788447103676-874919850.jpg",
+    "qtdVotos": 0,
+    "mediaVotos": 0
   }
 ]

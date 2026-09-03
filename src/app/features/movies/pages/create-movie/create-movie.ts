@@ -1,54 +1,75 @@
-import { Component, signal, WritableSignal } from '@angular/core';
+import { Component, signal, input, inject, computed } from '@angular/core';
+import { rxResource } from '@angular/core/rxjs-interop';
+import { FormsModule } from '@angular/forms';
+import { MoviesApi } from '../../services/movies-api/movies-api';
+import { setErrorMessage } from '../../../../shared/utils/set-error-message';
+import { tap } from 'rxjs';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-create-movie',
-  imports: [],
+  imports: [FormsModule, RouterLink],
   templateUrl: './create-movie.html',
   styleUrl: './create-movie.css',
 })
 export class CreateMovie {
-  // Sinal para armazenar o URL da pré-visualização da imagem
-  imagePreview: WritableSignal<string | null> = signal(null);
+  private readonly _moviesApi = inject(MoviesApi);
+  private readonly _router = inject(Router);
 
-  /**
-   * Manipula a seleção de arquivo pelo input.
-   * Abre o explorador de arquivos novamente se a imagem for clicada.
-   */
+  title = signal<string>('');
+  year = signal<number | undefined>(undefined);
+  category = signal<string>('');
+  description = signal<string>('');
+
+  imagePreview = signal<string | undefined>(undefined);
+  selectedFile = signal<File | undefined>(undefined);
+
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
 
-    // Certifica-se de que um arquivo foi selecionado
     if (input.files && input.files[0]) {
       const file = input.files[0];
+      this.selectedFile.set(file);
 
-      // Verifica se o arquivo é uma imagem
-      if (file.type.startsWith('image/')) {
-        const reader = new FileReader();
-
-        // Quando o arquivo é lido, armazena o resultado (base64) no sinal
-        reader.onload = (e) => {
-          this.imagePreview.set(e.target?.result as string);
-        };
-
-        // Lê o arquivo como URL de dados (Base64)
-        reader.readAsDataURL(file);
-      } else {
-        alert('Por favor, selecione um arquivo de imagem.');
-        // Opcional: Limpa o input se o arquivo não for uma imagem
-        input.value = '';
-        this.imagePreview.set(null);
+      if (this.imagePreview()) {
+        URL.revokeObjectURL(this.imagePreview()!);
       }
+
+      const urlObject = URL.createObjectURL(file);
+      this.imagePreview.set(urlObject);
     }
   }
 
-  // Opcional: Adicione métodos para Salvar e Cancelar
-  salvar() {
-    console.log('Filme salvo!');
-    // Implemente a lógica de envio do formulário aqui
-  }
+  createMovieResource = rxResource({
+    params: () => this.createMovieData(),
+    stream: ({ params }) =>
+      this._moviesApi.createMovie(params).pipe(
+        tap(() => {
+          setTimeout(() => {
+            this._router.navigate(['/explore']);
+          }, 700);
+        }),
+      ),
+  });
 
-  cancelar() {
-    console.log('Operação cancelada!');
-    // Implemente a lógica de navegação de volta ou fechamento de modal aqui
+  createMovieData = signal<FormData | undefined>(undefined);
+
+  errorMessage = computed(() => setErrorMessage(this.createMovieResource.error()));
+  succesMessage = computed(() => {
+    const SUCCESS = this.createMovieResource.hasValue();
+
+    return SUCCESS ? 'Filme criado com sucesso!' : undefined;
+  });
+
+  salvar() {
+    const formData = new FormData();
+
+    formData.append('titulo', this.title());
+    formData.append('anoLancamento', this.year()!.toString());
+    formData.append('genero', this.category());
+    formData.append('descricao', this.description());
+    formData.append('image', this.selectedFile()!);
+
+    this.createMovieData.set(formData);
   }
 }
