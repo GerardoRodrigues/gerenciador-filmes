@@ -6,6 +6,7 @@ import { tap } from 'rxjs';
 import { IUserLoginSuccessResponse } from '../../../shared/models/user-login-success-response';
 import { IUserRegisterSuccessResponse } from '../../../shared/models/user-register-success-response';
 import { UserInfosStore } from '../user-infos-store/user-infos-store';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +16,7 @@ export class UserApi {
   private readonly _userTokenStore = inject(UserTokenStore);
   private readonly _userInfosStore = inject(UserInfosStore);
 
-  private readonly URL = 'http://localhost:3000';
+  private readonly URL = environment.baseUrl;
 
   validateToken() {
     return this._httpClient.get<IUserTokenSuccessAuthResponse>(`${this.URL}/users/validate-token`);

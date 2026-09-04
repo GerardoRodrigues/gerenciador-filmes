@@ -3,12 +3,13 @@ import { inject, Injectable } from '@angular/core';
 import { MoviesListResponse } from '../../types/movies-list-response';
 import { IMovieToFavoriteSuccessResponse } from '../../models/movie-to-favorite-success-response';
 import { map, Observable } from 'rxjs';
+import { environment } from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class FavoritesApi {
-  private readonly URL = 'http://localhost:3000';
+  private readonly URL = environment.baseUrl;
   private readonly _httpClient = inject(HttpClient);
 
   getFavorites() {
